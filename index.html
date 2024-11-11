@@ -4,9 +4,9 @@
         <meta charset="utf-8">
         <title>title</title>
         <!--JS-->
-        <script src="js/main.js"></script>
         <script src="js/d3.min.js"></script>
         <script src="js/d3-tip.js"></script>
+
         <link rel="stylesheet" href="css/css.css" type="text/css">
     </head>
 
@@ -34,22 +34,20 @@
                 <option value="30" label="30min"></option>
             </datalist>
 
-
-
-            <p id="weibo_range">请选择微博数据源</p>
-            <select id="select_of_weibo" onchange="change_weibo()">
-                <option>所有微博</option>
-                <option>居民微博</option>
-                <option>游客微博</option>
-            </select>
-
-            <div id="charm">
+            <!-- 绘制统计图表 -->
+            <div id="chart">
                 这里是统计图表
+                <div id="bar-chart">
+                    <svg>
+                        <g class="xaxis"></g>
+                        <g class="yaxis"></g>
+                    </svg>
+                </div>
             </div>
         </div>
 
 
-
-
+        <!-- js文件 -->
+        <script src="js/main.js"></script>
     </body>
 </html>
