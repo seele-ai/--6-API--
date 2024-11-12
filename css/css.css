@@ -3,14 +3,13 @@ body{
     width: 100vw;
 }
 
-
-div.left{
+left{
     position: absolute;
     height: 100%;
     width: 49%;
 }
 
-div.right{
+right{
     position: absolute;
     height: 100%;
     width: 49%;
