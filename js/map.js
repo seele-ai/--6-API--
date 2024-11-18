@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function ()
     
 
 
-    fetch('json\\suzhoupoi.json') // 读取 suzhoupoi.json 文件
+    fetch('json\\suzhoupoi1.json') // 读取 suzhoupoi.json 文件
     .then(response => {
         if (!response.ok) {
             throw new Error('网络响应错误: ' + response.status);
