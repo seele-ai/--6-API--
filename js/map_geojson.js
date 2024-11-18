@@ -5,6 +5,7 @@ var map = new AMap.Map("map", { zoom: 12, center: [120.614176, 31.318072]});
 const range_of_time = document.getElementById('range_of_time');
 const poi_type_select = document.getElementById('poi_type');
 const travel_mode_select = document.getElementById('travel_mode');
+const reset_checkbox = document.getElementById('reset_checkbox'); // 添加复选框
 let thejsondata;
 
 // 更新地图函数
@@ -13,6 +14,7 @@ function updateMap() {
     const poiType = poi_type_select.value;
     const travelMode = travel_mode_select.value;
     const timeValue = range_of_time.value + "分钟";  // 获取时间值
+    const resetChecked = reset_checkbox.checked; // 获取复选框状态
 
     // 清空地图
     map.clearMap();
@@ -36,8 +38,9 @@ function updateMap() {
             data.forEach(lines => {
                 const theline = lines["geometry"]["coordinates"]; // 获取线数据
                 const name = lines["properties"]["category"]; // 获取类别
+                const timeValueInt = parseInt(name.replace("分钟", "")) || 99; // 提取时间值
 
-                if (name === timeValue) {  // 判断是否为选中的时间
+                if (resetChecked || name === timeValue) {  // 判断是否为选中的时间
                     const line_in_amap = [];  // 存储高德地图的节点坐标数组
                     theline.forEach(line => {
                         line.forEach(coord => {
@@ -52,6 +55,7 @@ function updateMap() {
                         fillOpacity: 0.5,
                         strokeColor: "#0000ff",
                         strokeWeight: 1,
+                        zIndex: 100 - timeValueInt, // 时间小的 zIndex 大，显示在上层
                     });
 
                     // 鼠标事件
@@ -79,6 +83,7 @@ function updateMap() {
 poi_type_select.addEventListener('change', updateMap);
 travel_mode_select.addEventListener('change', updateMap);
 range_of_time.addEventListener('change', updateMap);
+reset_checkbox.addEventListener('change', updateMap); // 监听“重置”复选框变化
 
 // 初次加载地图
 document.addEventListener('DOMContentLoaded', updateMap);
