@@ -8,7 +8,7 @@ map.clearMap();
 time_value = range_of_time.value + "分钟";
 document.addEventListener('DOMContentLoaded', function ()
 { 
-    fetch('json\\poi_clusters.geojson') // 读取 suzhoupoi.json 文件
+    fetch('json\\生活娱乐poi.geojson') // 读取 suzhoupoi.json 文件
     .then(response => {
         if (!response.ok) {
             throw new Error('网络响应错误: ' + response.status);
@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', function ()
             theline.forEach(
                 line => {
                     line.forEach(zuobiao => {
-                        line_in_amap.push(new AMap.LngLat(zuobiao[1],zuobiao[0]))
+                        line_in_amap.push(new AMap.LngLat(zuobiao[0],zuobiao[1]))
                     });
                 }
             )
@@ -74,7 +74,7 @@ function renewmap(){
         theline.forEach(
             line => {
                 line.forEach(zuobiao => {
-                    line_in_amap.push(new AMap.LngLat(zuobiao[1],zuobiao[0]))
+                    line_in_amap.push(new AMap.LngLat(zuobiao[0],zuobiao[1]))
                 });
             }
         )
