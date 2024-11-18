@@ -6,7 +6,7 @@
     <!--JS-->
     <script src="js/d3.min.js"></script>
     <script src="js/d3-tip.js"></script>
-    <script src="js/map.js"></script>
+    <!-- <script src="js/map.js"></script> -->
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script src="https://webapi.amap.com/maps?v=2.0&key=1b3947b104ef1ca4bffe551883e01d31"></script>
     <script src="https://cdn.jsdelivr.net/gh/leaflet-extras/leaflet-providers/leaflet-providers.js"></script>
@@ -26,7 +26,7 @@
         <div class="right">
             <!-- 等时圈时间选择 -->
             <p id="time_value">time value</p>
-            <input id="range_of_time" type="range" value="10" max="30" min="5" onchange="change_time()" title="等时圈范围选择" list="time_ticks">
+            <input id="range_of_time" type="range" step="5" value="10" max="30" min="5" onchange="change_time()" title="等时圈范围选择" list="time_ticks">
             <!--拖动条刻度设置-->
             <datalist id = "time_ticks">
                 <option value="5" label="5min"></option>
