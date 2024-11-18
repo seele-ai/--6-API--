@@ -5,6 +5,7 @@ function change_time()
     time_value = range_of_time.value;
     document.getElementById("time_value").innerHTML = ("您改变了一下时间:" + time_value + "min");
     update_chart(get_all_value());
+    renewmap();
 }
 
 
