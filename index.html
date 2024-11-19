@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>title</title>
+    <title>“苏州园林”可达圈分析</title>
     <!--JS-->
     <script src="js/d3.min.js"></script>
     <script src="js/d3-tip.js"></script>
@@ -18,61 +18,62 @@
 
 
     <body>
+        <!-- 页面布局 -->
+        <div class="container">
         <!--页面左侧 -->
-        <div class="left" id="map">
+            <div class="left" id="map">
 
-        </div>
+            </div>
 
-        <!--页面右侧-->
-        <div class="right">
+            <!--页面右侧-->
+            <div class="right">
 
-            <!-- POI类别选择 -->
-            <label for="poi_type">选择POI类别:</label>
-            <select id="poi_type" onchange="updateMap()">
-                <option value="生活娱乐">生活娱乐</option>
-                <option value="城市公园">城市公园</option>
-                <option value="住宿酒店">住宿酒店</option>
-            </select>
+                <!-- POI类别选择 -->
+                <label for="poi_type">选择POI类别:</label>
+                <select id="poi_type" onchange="updateMap()">
+                    <option value="生活娱乐">生活娱乐</option>
+                    <option value="城市公园">城市公园</option>
+                    <option value="住宿酒店">住宿酒店</option>
+                </select>
 
-            <!-- 出行方式选择 -->
-            <label for="travel_mode">选择出行方式:</label>
-            <select id="travel_mode" onchange="updateMap()">
-                <option value="驾车">驾车</option>
-                <option value="步行">步行</option>
-                <option value="骑行">骑行</option>
-            </select>
+                <!-- 出行方式选择 -->
+                <label for="travel_mode">选择出行方式:</label>
+                <select id="travel_mode" onchange="updateMap()">
+                    <option value="驾车">驾车</option>
+                    <option value="步行">步行</option>
+                    <option value="骑行">骑行</option>
+                </select>
 
-            <label>
-        		<input type="checkbox" id="reset_checkbox">
-        		显示等时圈
-	        </label>
-            
-            <!-- 等时圈时间选择 -->
-            <p id="time_value">time value</p>
-            <input id="range_of_time" type="range" step="5" value="10" max="30" min="5" onchange="change_time()" title="等时圈范围选择" list="time_ticks">
-            <!--拖动条刻度设置-->
-            <datalist id = "time_ticks">
-                <option value="5" label="5min"></option>
-                <option value="10" label="10min"></option>
-                <option value="15" label="15min"></option>
-                <option value="20" label="20min"></option>
-                <option value="25" label="25min"></option>
-                <option value="30" label="30min"></option>
-            </datalist>
+                <label>
+                    <input type="checkbox" id="reset_checkbox">
+                    显示等时圈
+                </label>
+                
+                <!-- 等时圈时间选择 -->
+                <p id="time_value">time value</p>
+                <input id="range_of_time" type="range" step="5" value="10" max="30" min="5" onchange="change_time()" title="等时圈范围选择" list="time_ticks">
+                <!--拖动条刻度设置-->
+                <datalist id = "time_ticks">
+                    <option value="5" label="5min"></option>
+                    <option value="10" label="10min"></option>
+                    <option value="15" label="15min"></option>
+                    <option value="20" label="20min"></option>
+                    <option value="25" label="25min"></option>
+                    <option value="30" label="30min"></option>
+                </datalist>
 
-            <!-- 绘制统计图表 -->
-            <div id="chart">
-                这里是统计图表
-                <div id="bar-chart">
-                    <svg>
-                        <g class="xaxis"></g>
-                        <g class="yaxis"></g>
-                    </svg>
+                <!-- 绘制统计图表 -->
+                <div id="chart">
+                    这里是统计图表
+                    <div id="bar-chart">
+                        <svg>
+                            <g class="xaxis"></g>
+                            <g class="yaxis"></g>
+                        </svg>
+                    </div>
                 </div>
             </div>
         </div>
-
-
         <!-- js文件 -->
         <script src="js/main.js"></script>
         <script src="js/map_geojson.js"></script>

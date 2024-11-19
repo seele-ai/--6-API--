@@ -117,6 +117,7 @@ function updateMap() {
 
             // 自动缩放地图以适应多边形
             map.setFitView();
+            
         })
         .catch(error => {
             console.error('加载JSON数据时出错:', error);
