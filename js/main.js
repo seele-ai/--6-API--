@@ -32,7 +32,8 @@ function update_chart(values)
         document.getElementById("chart").innerHTML = 
         "参数已更新<br> 当前参数：<br> &emsp;等时圈时间：" + values["time_value"] + "min"
          + "<br>&emsp;POI: " + poidata["index"]
-        + "<br>&emsp;data: " + poidata["pois"]
+        + "<br>&emsp;data: " + positions.length
+
         /*读取数据后绘图
         svg = d3.select("#bar-chart").select("svg")
         svg.attr("class","firstsvg")
