@@ -25,6 +25,28 @@
 
         <!--页面右侧-->
         <div class="right">
+
+            <!-- POI类别选择 -->
+            <label for="poi_type">选择POI类别:</label>
+            <select id="poi_type" onchange="updateMap()">
+                <option value="生活娱乐">生活娱乐</option>
+                <option value="城市公园">城市公园</option>
+                <option value="住宿酒店">住宿酒店</option>
+            </select>
+
+            <!-- 出行方式选择 -->
+            <label for="travel_mode">选择出行方式:</label>
+            <select id="travel_mode" onchange="updateMap()">
+                <option value="驾车">驾车</option>
+                <option value="步行">步行</option>
+                <option value="骑行">骑行</option>
+            </select>
+
+            <label>
+        		<input type="checkbox" id="reset_checkbox">
+        		显示等时圈
+	        </label>
+            
             <!-- 等时圈时间选择 -->
             <p id="time_value">time value</p>
             <input id="range_of_time" type="range" step="5" value="10" max="30" min="5" onchange="change_time()" title="等时圈范围选择" list="time_ticks">
