@@ -1,4 +1,4 @@
-window._AMapSecurityConfig = { securityJsCode: "7242ca1699a807f992d7be20b7536e11" };
+window._AMapSecurityConfig = { securityJsCode: "5849bddb599c9c33341160860a569ad1" };
 var map = new AMap.Map("map", { zoom: 12, center: [120.614176, 31.318072]});
 
 // 获取DOM元素
@@ -7,7 +7,6 @@ const poi_type_select = document.getElementById('poi_type');
 const travel_mode_select = document.getElementById('travel_mode');
 const reset_checkbox = document.getElementById('reset_checkbox'); // 添加复选框
 let thejsondata;
-
 let poijsondata;
 var positions = [];
 
@@ -19,9 +18,9 @@ function updateMap() {
     const timeValue = range_of_time.value + "分钟";  // 获取时间值
     const resetChecked = reset_checkbox.checked; // 获取复选框状态
 
-    // 清空地图
+    // 清空地图初始化poi数组
     map.clearMap();
-
+    
     // 拼接GeoJSON文件路径
     const geojsonPath = `json/${travelMode}_${poiType}.geojson`;
 
@@ -83,7 +82,7 @@ function updateMap() {
                         .then(poiData => {
                             poijsondata = poiData;
                             positions = [];
-                            poiData.forEach(point => {
+                            poijsondata.forEach(point => {
                                 const poiPosition = new AMap.LngLat(point.longitude, point.latitude);
 
                                 if (polygon.contains(poiPosition)) {
@@ -108,6 +107,8 @@ function updateMap() {
                                     });
                                 }
                             });
+                            change_time();
+                            update_chart(get_all_value());
                         })
                         .catch(error => {
                             console.error('加载POI数据时出错:', error);
@@ -117,7 +118,6 @@ function updateMap() {
 
             // 自动缩放地图以适应多边形
             map.setFitView();
-            
         })
         .catch(error => {
             console.error('加载JSON数据时出错:', error);
@@ -129,6 +129,5 @@ poi_type_select.addEventListener('change', updateMap);
 travel_mode_select.addEventListener('change', updateMap);
 range_of_time.addEventListener('change', updateMap);
 reset_checkbox.addEventListener('change', updateMap); // 监听“重置”复选框变化
-
 // 初次加载地图
 document.addEventListener('DOMContentLoaded', updateMap);
