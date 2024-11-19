@@ -154,7 +154,7 @@ function renewmap(){
                         title: point.title,
                         map: map
                     });
-
+                    positions.push(poiPosition)//当前多边形内的poi点位
                     var infoWindow = new AMap.InfoWindow({
                         content: `<div>
                                     <h4>${point.title}</h4>
