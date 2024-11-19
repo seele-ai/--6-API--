@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', function ()
                         map: map
                     });
 
-                    positions.push(poiPosition)//当前多边形内的poi点位
+                    positions.push(point)//当前多边形内的poi点位
 
                     var infoWindow = new AMap.InfoWindow({
                         content: `<div>
@@ -155,7 +155,7 @@ function renewmap(){
                         title: point.title,
                         map: map
                     });
-                    positions.push(poiPosition)//当前多边形内的poi点位
+                    positions.push(point)//当前多边形内的poi点位
 
                     var infoWindow = new AMap.InfoWindow({
                         content: `<div>
