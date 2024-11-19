@@ -61,7 +61,8 @@ document.addEventListener('DOMContentLoaded', function ()
         return response.json(); // 将响应转换为 JSON
     })
     .then(jsonData => {
-        poijsondata=jsonData
+        poijsondata = jsonData
+        positions=[]
         jsonData.forEach(function (point) {
             var poiPosition = new AMap.LngLat(point.longitude, point.latitude);
 
@@ -144,10 +145,10 @@ function renewmap(){
 
         map.add(polygon) // 添加多边形
         map.setFitView([polygon]) // 自动缩放地图
-
+        positions=[]
         poijsondata.forEach(function (point) {
             var poiPosition = new AMap.LngLat(point.longitude, point.latitude);
-
+                
                 if (polygon.contains(poiPosition)) {
                     var marker = new AMap.Marker({
                         position: [point.longitude, point.latitude],
@@ -155,6 +156,7 @@ function renewmap(){
                         map: map
                     });
                     positions.push(poiPosition)//当前多边形内的poi点位
+
                     var infoWindow = new AMap.InfoWindow({
                         content: `<div>
                                     <h4>${point.title}</h4>
