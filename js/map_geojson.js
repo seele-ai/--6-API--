@@ -2,8 +2,8 @@ window._AMapSecurityConfig = { securityJsCode: "7242ca1699a807f992d7be20b7536e11
 var map = new AMap.Map("map", { zoom: 12, center: [120.418691, 30.901641]});
 const range_of_time = document.getElementById('range_of_time');
 let thejsondata;
-
-
+let poijsondata;
+var positions = [];
 map.clearMap();
 time_value = range_of_time.value + "分钟";
 document.addEventListener('DOMContentLoaded', function ()
@@ -51,14 +51,8 @@ document.addEventListener('DOMContentLoaded', function ()
 
             map.add(polygon) // 添加多边形
             map.setFitView([polygon]) // 自动缩放地图
-        }
-        });
-    })
-    .catch(error => {
-        console.error('加载JSON数据时出错:', error);
-    });
 
-    
+
     fetch('json\\生活娱乐.json') // 读取 suzhoupoi.json 文件
     .then(response => {
         if (!response.ok) {
@@ -67,29 +61,49 @@ document.addEventListener('DOMContentLoaded', function ()
         return response.json(); // 将响应转换为 JSON
     })
     .then(jsonData => {
+        poijsondata=jsonData
         jsonData.forEach(function (point) {
-            var marker = new AMap.Marker({
-                position: [point.longitude, point.latitude],
-                title: point.title,
-                map: map
-            });
+            var poiPosition = new AMap.LngLat(point.longitude, point.latitude);
 
-            var infoWindow = new AMap.InfoWindow({
-                content: `<div>
-                            <h4>${point.title}</h4>
-                            <p>分类: ${point.category_name}</p>
-                          </div>`,
-                offset: new AMap.Pixel(0, -30)
-            });
+                if (polygon.contains(poiPosition)) {
+                    var marker = new AMap.Marker({
+                        position: [point.longitude, point.latitude],
+                        title: point.title,
+                        map: map
+                    });
 
-            marker.on('click', function () {
-                infoWindow.open(map, marker.getPosition());
+                    positions.push(poiPosition)//当前多边形内的poi点位
+
+                    var infoWindow = new AMap.InfoWindow({
+                        content: `<div>
+                                    <h4>${point.title}</h4>
+                                    <p>分类: ${point.category_name}</p>
+                                  </div>`,
+                        offset: new AMap.Pixel(0, -30)
+                    });
+
+                    marker.on('click', function () {
+                        infoWindow.open(map, marker.getPosition());
+                    });
+                }
             });
+    })
+    .catch(error => {
+        console.error('加载JSON数据时出错:', error);
+    });
+
+
+
+
+        }
         });
     })
     .catch(error => {
         console.error('加载JSON数据时出错:', error);
     });
+
+    
+    
 });
 
 
@@ -130,6 +144,30 @@ function renewmap(){
 
         map.add(polygon) // 添加多边形
         map.setFitView([polygon]) // 自动缩放地图
+
+        poijsondata.forEach(function (point) {
+            var poiPosition = new AMap.LngLat(point.longitude, point.latitude);
+
+                if (polygon.contains(poiPosition)) {
+                    var marker = new AMap.Marker({
+                        position: [point.longitude, point.latitude],
+                        title: point.title,
+                        map: map
+                    });
+
+                    var infoWindow = new AMap.InfoWindow({
+                        content: `<div>
+                                    <h4>${point.title}</h4>
+                                    <p>分类: ${point.category_name}</p>
+                                  </div>`,
+                        offset: new AMap.Pixel(0, -30)
+                    });
+
+                    marker.on('click', function () {
+                        infoWindow.open(map, marker.getPosition());
+                    });
+                }
+            });
     }
     });
 };
