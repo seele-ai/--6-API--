@@ -69,7 +69,7 @@ function updateMap() {
 
                     // 添加到地图
                     map.add(polygon);
-
+                    if(!resetChecked){
                     // 加载 POI 数据并筛选
                     const poiPath = `json/${poiType}.json`;
                     fetch(poiPath)
@@ -113,7 +113,7 @@ function updateMap() {
                         .catch(error => {
                             console.error('加载POI数据时出错:', error);
                         });
-                }
+                }}
             });
 
             // 自动缩放地图以适应多边形
