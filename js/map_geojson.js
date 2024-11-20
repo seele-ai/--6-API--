@@ -72,7 +72,8 @@ function updateMap() {
                     map.add(polygon);
 
                     // 加载 POI 数据并筛选
-                    fetch('json/生活娱乐.json')
+                    const poiPath = `json/${poiType}.json`;
+                    fetch(poiPath)
                         .then(response => {
                             if (!response.ok) {
                                 throw new Error('网络响应错误: ' + response.status);
