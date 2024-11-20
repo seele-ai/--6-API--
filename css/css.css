@@ -68,3 +68,8 @@ select, input[type="range"] {
     width: 100%;
     height: 300px; /* 你可以根据需要调整大小 */
 }
+
+/* 地图弹出框中的h4 */
+.windowh4{
+margin: 5%;
+}
