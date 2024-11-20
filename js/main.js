@@ -22,6 +22,7 @@ function get_all_value()
 //更新图表
 function update_chart(values)
 {   
+    document.getElementById("poi_index").innerHTML = ""
     document.getElementById("bar-chart").innerHTML = "&emsp;等时圈时间：" + values["time_value"] + "min"
     + "<br>&emsp;等时圈内poi数目: " + positions.length + '<div id="way"></div>' 
     selected_positions = positions.sort(function(a,b){
@@ -42,7 +43,7 @@ function update_chart(values)
             content: `<div>
                         <h4 class="windowh4">${a.title}</h4>
                         <p>该POI签到数: ${a.checkin_user_num}</p>
-                        <button type="button" class="poi_button" id="${a.title}"> 规划路径 </button>
+                        <button type="button" class="poi_button" id="${a.title}"> 前往此处 </button>
                       </div>`,
             offset: new AMap.Pixel(0, -30)
         }); // 筛选后的框
@@ -68,18 +69,22 @@ function load_way(lat,lon){
     document.getElementById("bar-chart").innerHTML = "路径规划结果如下：<div id='way'></div>" 
     document.getElementById("poi_index").innerHTML = "" 
     endlnglat = [lon,lat] //终点
-    startlnglat = [120.629211,31.324194]
+    startlnglat = [120.629211,31.324194] //起点
 
     const travel_mode_select = document.getElementById('travel_mode'); // 交通方式
     mode = travel_mode_select.value
     if(mode == "驾车"){
         driving.clear();
         riding.clear();
-        driving.search(startlnglat,endlnglat)
+        driving.search(startlnglat,endlnglat,function (status, result){
+            document.getElementById("poi_index").innerHTML+=`预计用时：${(result.routes[0].time/60).toFixed(2)}min`
+        })
     }else{
         driving.clear();
         riding.clear();
-        riding.search(startlnglat,endlnglat)
+        riding.search(startlnglat,endlnglat,function (status, result){
+            document.getElementById("poi_index").innerHTML+=`预计用时：${(result.routes[0].time/60).toFixed(2)}min`
+        })
     }
 }
 
