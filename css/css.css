@@ -21,13 +21,13 @@ body, html {
 
 /* 右侧面板 */
 .right {
-    width: 300px; /* 设置右侧面板宽度 */
+    width: 400px; /* 设置右侧面板宽度 */
     padding: 20px;
     background-color: rgba(255, 255, 255, 0.8); /* 半透明背景 */
     position: fixed;
     top: 0;
     right: 0;
-    height: 50%;
+    height: 70%;
     overflow-y: auto;
     box-shadow: -2px 0px 10px rgba(0, 0, 0, 0.1); /* 给右侧面板加上阴影 */
 }
