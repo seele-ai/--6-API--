@@ -8,8 +8,15 @@
     <script src="js/d3-tip.js"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script> <!--jquery-->
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-    <script src="https://webapi.amap.com/maps?v=2.0&key=bb1ea64094a8edd0fc2034f96d19063c"></script>
+
+    <!-- 要先设置安全密钥再调用API -->
+    <script type="text/javascript">
+        window._AMapSecurityConfig = { securityJsCode: "5849bddb599c9c33341160860a569ad1" };
+    </script>
+    
+    <script src="https://webapi.amap.com/maps?v=2.0&key=bb1ea64094a8edd0fc2034f96d19063c&plugin=AMap.Driving"></script>
     <script src="https://cdn.jsdelivr.net/gh/leaflet-extras/leaflet-providers/leaflet-providers.js"></script>
+
     <link rel="stylesheet" href="css/css.css" type="text/css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" type="text/css">
 </head>
@@ -45,7 +52,7 @@
 
                 <label>
                     <input type="checkbox" id="reset_checkbox">
-                    显示等时圈
+                    显示所有等时圈
                 </label>
                 
                 <!-- 等时圈时间选择 -->

@@ -1,4 +1,3 @@
-window._AMapSecurityConfig = { securityJsCode: "5849bddb599c9c33341160860a569ad1" };
 var map = new AMap.Map("map", { zoom: 12, center: [120.614176, 31.318072]});
 
 // 获取DOM元素

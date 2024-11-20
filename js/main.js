@@ -23,11 +23,12 @@ function get_all_value()
 function update_chart(values)
 {   
     document.getElementById("bar-chart").innerHTML = "&emsp;等时圈时间：" + values["time_value"] + "min"
-    + "<br>&emsp;等时圈内poi数目: " + positions.length + '<svg id="poisvg"><g class="xaxis"></g><g class="yaxis"></g></svg>' 
+    + "<br>&emsp;等时圈内poi数目: " + positions.length + '<div id="way"></div>' 
     selected_positions = positions.sort(function(a,b){
         return  b["checkin_user_num"] - a["checkin_user_num"] // 按签到数排序
     }).slice(0,10) // 切片
     
+    // 根据筛选后的Poi更新icon与函数
     selected_positions.forEach(a => 
     {
         const marker = new AMap.Marker({
@@ -54,9 +55,37 @@ function update_chart(values)
         });
 
         function updateButton(){
-            console.log(a.latitude)
-            console.log(a.longitude) // 这里调用路径规划API
+            load_way(a.latitude,a.longitude)
         }
     });
 
+    // 绘制统计图表吗？
 };
+
+
+function load_way(lat,lon){
+    map.clearMap();
+    endlnglat = [lon,lat] //终点
+    startlnglat = [120.629211,31.324194]
+    
+    const travel_mode_select = document.getElementById('travel_mode'); // 交通方式
+    mode = travel_mode_select.value
+
+    var driving = new AMap.Driving({
+        policy:0,
+        map:map,
+        panel:"way"
+    });
+
+    driving.search(startlnglat, endlnglat, function(status, result){
+        /*way = result.routes[0].steps
+        theway = document.getElementById("way")
+        way.forEach(a => {
+            start = a.startlocation
+            end = a.endlocation
+
+            theway.innerHTML += `${a.instruction}<br>`
+        });*/
+
+    })
+}

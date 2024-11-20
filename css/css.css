@@ -64,7 +64,7 @@ select, input[type="range"] {
 }
 
 /* 统计图表SVG样式 */
-#bar-chart svg {
+#way {
     width: 100%;
     height: 300px; /* 你可以根据需要调整大小 */
 }
