@@ -29,9 +29,16 @@ function update_chart(values)
         return  b["checkin_user_num"] - a["checkin_user_num"] // 按签到数排序
     }).slice(0,10) // 切片
     
-    // 根据筛选后的Poi更新icon与函数
+    tablehead =  "<table border='1'><thead><tr><th>POI名称</th><th>打卡数</th><th>前往此处</th></tr></thead><tbody>" // 表头
+
+    // 根据筛选后的Poi更新其icon与列表
     selected_positions.forEach(a => 
-    {
+    {   
+        tablehead +=`<tr>
+        <td>${a.title}</td>
+        <td>${a.checkin_user_num}</td>
+        <td><button type="button" class="poi_button" id="table_${a.title}"> 前往此处 </button></td>
+        </tr>`
         const marker = new AMap.Marker({
             position: [a.longitude, a.latitude],
             title: a.title,
@@ -61,7 +68,18 @@ function update_chart(values)
         }
     });
 
-    // 绘制统计图表吗？
+    document.getElementById("way").innerHTML += tablehead + "</tbody>" // 表格结尾
+
+    // 为表格中的按钮添加函数
+    selected_positions.forEach(a => 
+        {   
+            const button = document.getElementById(`table_${a.title}`)
+            button.addEventListener("click", updateButton);
+            function updateButton(){
+                map.clearMap();
+                load_way(a.latitude,a.longitude)
+            }
+        })
 };
 
 
