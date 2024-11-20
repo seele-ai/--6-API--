@@ -65,21 +65,20 @@ function update_chart(values)
 
 
 function load_way(lat,lon){
-    map.clearMap();
     document.getElementById("bar-chart").innerHTML = "路径规划结果如下：<div id='way'></div>" 
     document.getElementById("poi_index").innerHTML = "" 
     endlnglat = [lon,lat] //终点
     startlnglat = [120.629211,31.324194]
-    
+    driving.clear();
+    driving.search(startlnglat,endlnglat)
+
     const travel_mode_select = document.getElementById('travel_mode'); // 交通方式
     mode = travel_mode_select.value
-
-    var driving = new AMap.Driving({
-        policy:0,
-        map:map,
-        panel:"way"
-    });
-    driving.clear()
-    driving.search(startlnglat, endlnglat, function(status, result){
-    })
 }
+
+var driving = new AMap.Driving({
+    policy:0,
+    map:map,
+    panel:"way"
+}); //驾车插件
+
