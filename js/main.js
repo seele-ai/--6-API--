@@ -1,6 +1,6 @@
 // 改变等时圈拖动条
 function change_time() 
-{
+{   
     const range_of_time = document.getElementById('range_of_time');
     time_value = range_of_time.value;
     document.getElementById("time_value").innerHTML = ("等时圈时间:" + time_value + "min");
@@ -55,6 +55,7 @@ function update_chart(values)
         });
 
         function updateButton(){
+            map.clearMap();
             load_way(a.latitude,a.longitude)
         }
     });
@@ -65,6 +66,8 @@ function update_chart(values)
 
 function load_way(lat,lon){
     map.clearMap();
+    document.getElementById("bar-chart").innerHTML = "路径规划结果如下：<div id='way'></div>" 
+    document.getElementById("poi_index").innerHTML = "" 
     endlnglat = [lon,lat] //终点
     startlnglat = [120.629211,31.324194]
     
@@ -76,16 +79,7 @@ function load_way(lat,lon){
         map:map,
         panel:"way"
     });
-
+    driving.clear()
     driving.search(startlnglat, endlnglat, function(status, result){
-        /*way = result.routes[0].steps
-        theway = document.getElementById("way")
-        way.forEach(a => {
-            start = a.startlocation
-            end = a.endlocation
-
-            theway.innerHTML += `${a.instruction}<br>`
-        });*/
-
     })
 }
