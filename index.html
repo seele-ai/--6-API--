@@ -46,7 +46,7 @@
                 <label for="travel_mode">选择出行方式:</label>
                 <select id="travel_mode" onchange="updateMap()">
                     <option value="驾车">驾车</option>
-                    <option value="步行">步行</option>
+                    <!--<option value="步行">步行</option>-->
                     <option value="骑行">骑行</option>
                 </select>
 
@@ -57,7 +57,7 @@
                 
                 <!-- 等时圈时间选择 -->
                 <p id="time_value">time value</p>
-                <input id="range_of_time" type="range" step="5" value="10" max="30" min="5"  title="等时圈范围选择" list="time_ticks">
+                <input id="range_of_time" type="range" step="5" value="15" max="30" min="15"  title="等时圈范围选择" list="time_ticks">
                 <!--拖动条刻度设置-->
                 <datalist id = "time_ticks">
                     <option value="5" label="5min"></option>
