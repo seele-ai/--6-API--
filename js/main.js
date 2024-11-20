@@ -69,11 +69,18 @@ function load_way(lat,lon){
     document.getElementById("poi_index").innerHTML = "" 
     endlnglat = [lon,lat] //终点
     startlnglat = [120.629211,31.324194]
-    driving.clear();
-    driving.search(startlnglat,endlnglat)
 
     const travel_mode_select = document.getElementById('travel_mode'); // 交通方式
     mode = travel_mode_select.value
+    if(mode == "驾车"){
+        driving.clear();
+        riding.clear();
+        driving.search(startlnglat,endlnglat)
+    }else{
+        driving.clear();
+        riding.clear();
+        riding.search(startlnglat,endlnglat)
+    }
 }
 
 var driving = new AMap.Driving({
@@ -82,3 +89,8 @@ var driving = new AMap.Driving({
     panel:"way"
 }); //驾车插件
 
+var riding = new AMap.Riding({
+    policy:0,
+    map:map,
+    panel:"way"
+}); //骑行插件
