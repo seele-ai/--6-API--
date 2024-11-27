@@ -86,26 +86,9 @@ function updateMap() {
                                 const poiPosition = new AMap.LngLat(point.longitude, point.latitude);
 
                                 if (polygon.contains(poiPosition)) {
-                                    const marker = new AMap.Marker({
-                                        position: [point.longitude, point.latitude],
-                                        title: point.title,
-                                        map: map
-                                    });
-
                                     positions.push(point); // 当前多边形内的 POI 点位
-
-                                    const infoWindow = new AMap.InfoWindow({
-                                        content: `<div>
-                                                    <h4>${point.title}</h4>
-                                                    <p>分类: ${point.category_name}</p>
-                                                  </div>`,
-                                        offset: new AMap.Pixel(0, -30)
-                                    });
-
-                                    marker.on('click', () => {
-                                        infoWindow.open(map, marker.getPosition());
-                                    });
                                 }
+                                
                             });
                             change_time();
                             update_chart(get_all_value());

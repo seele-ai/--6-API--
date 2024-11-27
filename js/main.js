@@ -29,9 +29,14 @@ function update_chart(values)
         return  b["checkin_user_num"] - a["checkin_user_num"] // 按签到数排序
     }).slice(0,10) // 切片
     
+    other_positions = positions.sort(function(a,b){
+        return  b["checkin_user_num"] - a["checkin_user_num"]
+    }).slice(10,) // 切片
+
+
     tablehead =  "<table border='1'><thead><tr><th>POI名称</th><th>打卡数</th><th>前往此处</th></tr></thead><tbody>" // 表头
 
-    // 根据筛选后的Poi更新其icon与列表
+    // 根据前10个的Poi更新其icon与列表
     selected_positions.forEach(a => 
     {   
         tablehead +=`<tr>
@@ -39,6 +44,7 @@ function update_chart(values)
         <td>${a.checkin_user_num}</td>
         <td><button type="button" class="poi_button" id="table_${a.title}"> 前往此处 </button></td>
         </tr>`
+
         const marker = new AMap.Marker({
             position: [a.longitude, a.latitude],
             title: a.title,
@@ -52,7 +58,7 @@ function update_chart(values)
                         <p>该POI签到数: ${a.checkin_user_num}</p>
                         <button type="button" class="poi_button" id="${a.title}"> 前往此处 </button>
                       </div>`,
-            offset: new AMap.Pixel(0, -30)
+            offset: new AMap.Pixel(11, 2)
         }); // 筛选后的框
         
         marker.on('click', () => {
@@ -67,6 +73,33 @@ function update_chart(values)
             load_way(a.latitude,a.longitude)
         }
     });
+
+    // 其余POI的显示
+    other_positions.forEach(point => 
+        {   
+            const marker = new AMap.Marker({
+                position: [point.longitude, point.latitude],
+                title: point.title,
+                map: map
+            });
+
+            const infoWindow = new AMap.InfoWindow({
+                content: `<div>
+                            <h4>${point.title}</h4>
+                            <p>分类: ${point.category_name}</p>
+                          </div>`,
+                offset: new AMap.Pixel(0, -30)
+            });
+
+            marker.on('click', () => {
+                infoWindow.open(map, marker.getPosition());
+            });
+        })
+
+
+
+
+
 
     document.getElementById("way").innerHTML += tablehead + "</tbody>" // 表格结尾
 
